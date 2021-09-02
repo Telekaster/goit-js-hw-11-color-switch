@@ -13,24 +13,31 @@ export const colors = [
 
 start.addEventListener('click', clickStartHandler);
 stop.addEventListener('click', clickStopHandler);
+let intervalNumber = 0;
+
+
 
 function clickStartHandler() {
     console.log('start');
     start.classList.add('not_active')
     start.removeEventListener('click', clickStartHandler)
 
-    setInterval(() => {
-        const index = randomIntegerFromInterval(0, colors.length-1);
-        console.log(colors[index]);
+    const interval = setInterval(() => {
+        const index = randomIntegerFromInterval(0, colors.length - 1);
+        
         return body.style.background = colors[index];
     }, 1000);
     
-
+    return intervalNumber = interval;
    
 }
 
 function clickStopHandler() {
-    console.log('stop');
+
+    clearTimeout(intervalNumber)
+    start.classList.remove('not_active')
+    start.addEventListener('click', clickStartHandler);
+
 };
 
 function randomIntegerFromInterval (min, max) {
